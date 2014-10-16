@@ -1,0 +1,52 @@
+
+<!-- http://plnkr.co/edit/WQmikHlqC5v4lkJH2zgm?p=preview -->
+<!DOCTYPE html>
+<html ng-app="viewModule">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body ng-controller="mainCtrl">
+  <h1>{{message}}</h1>
+  <div>{{error}}</div>
+ <form name="searchForm">
+      <input type="search" required placeholder="user name" ng-model="username">
+      <input type="submit" ng-click="search(username)" />
+    </form>
+
+  <div ng-show="user">
+    <p>Login ID: {{user.login}}
+      <br/>User Name: {{user.id}}</p>
+    <select ng-model="sortOrder">
+      <option value="name">Name</option>
+      <option value="-stargazers_count">Stars</option>
+      <option value="+language">Language</option>
+    </select>
+    
+  </div>
+
+  <table ng-show="user">
+    <thead>
+      <tr>
+
+        <th>name</th>
+        <th>Stars</th>
+        <th>Langauge</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="repo in repos | orderBy:sortOrder">
+
+        <td>{{repo.name}}</td>
+        <td>{{repo.stargazers_count }}</td>
+        <td>{{repo.language}}</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
